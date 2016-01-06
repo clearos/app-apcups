@@ -44,7 +44,7 @@ echo row_open();
 
 echo column_open(6);
 echo "<div class='theme-center-text'>";
-echo "<div class='theme-biggest-text'>" . $status . "</div>";
+echo "<div class='theme-biggest-text" . ($status != 'ONLINE' ? ' theme-text-alert' : '') . "'>" . $status . "</div>";
 echo "<div class='theme-smaller-text'>" . lang('apcups_status') . "</div>";
 echo "</div>";
 echo column_close();

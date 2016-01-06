@@ -68,6 +68,10 @@ function get_status() {
             if (data != undefined && data.code == 0) {
                 $('#model_text').html(data.status.model);
                 $('#status_text').html(data.status.status);
+                if (data.status.status != 'ONLINE')
+                    $('#status_text').addClass('theme-text-alert');
+                else
+                    $('#status_text').removeClass('theme-text-alert');
                 $('#load_percent_text').html(data.status.loadpct);
                 $('#battery_charge_text').html(data.status.bcharge);
                 $('#battery_time_remaining_text').html(data.status.timeleft);
