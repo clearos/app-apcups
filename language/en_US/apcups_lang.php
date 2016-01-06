@@ -1,9 +1,11 @@
 <?php
+
 $lang['apcups_admin_email_address'] = 'Email Alerts To';
 $lang['apcups_app_description'] = 'APC Battery Backup/UPS provides status information, reporting and administrative actions for managing supported APC UPS models.';
 $lang['apcups_app_name'] = 'APC Battery Backup Manager';
 $lang['apcups_battery_age'] = 'Battery Age';
 $lang['apcups_battery_charge'] = 'Battery Charge';
+$lang['apcups_battery_remaining'] = 'battery remaining';
 $lang['apcups_battery_time_remaining'] = 'Time Remaining on Battery';
 $lang['apcups_battery_time_remaining_dashboard'] = 'Batt. Time (min)';
 $lang['apcups_invalid_powerdown'] = 'Powerdown on battery percent is invalid.';

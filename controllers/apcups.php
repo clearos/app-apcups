@@ -70,4 +70,32 @@ class ApcUPS extends ClearOS_Controller
 
         $this->page->view_forms($views, lang('apcups_app_name'));
     }
+
+    /**
+     * APC UPS ajax status controller
+     *
+     * @return view
+     */
+
+    function status()
+    {
+        // Load libraries
+        //---------------
+
+        $this->lang->load('apcups');
+        $this->load->library('apcups/Apc');
+
+        header('Cache-Control: no-cache, must-revalidate');
+        header('Content-type: application/json');
+        try {
+            echo json_encode(
+                Array(
+                    'code' => 0,
+                    'status' => $this->apc->get_status()
+                )
+            );
+        } catch (Exception $e) {
+            echo json_encode(Array('code' => clearos_exception_code($e), 'errmsg' => clearos_exception_message($e)));
+        }
+    }
 }

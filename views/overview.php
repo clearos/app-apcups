@@ -37,7 +37,7 @@ $this->lang->load('base');
 $this->lang->load('apcups');
 
 if (isset($error))
-    echo infobox_warning(lang('base_warning'), $error);
+    echo infobox_warning(lang('base_warning'), $error, array('id' => 'connection_error'));
 
 ///////////////////////////////////////////////////////////////////////////////
 // Form open
@@ -53,12 +53,12 @@ echo form_header(lang('base_summary'));
 if ($mode === 'edit') {
     $read_only = FALSE;
     $buttons = array(
-        form_submit_update('submit'),
+        form_submit_update('submit', 'important', array('id' => 'submit_update')),
         anchor_cancel('/app/apcups')
     );
 } else {
     $read_only = TRUE;
-    // Only display edit button if RAID is detected/supported
+    // Only display edit button if connected to UPS
     if ($is_found)
         $buttons = array(anchor_edit('/app/apcups/settings/edit'));
 }

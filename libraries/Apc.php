@@ -248,7 +248,7 @@ class Apc extends Daemon
         clearos_profile(__METHOD__, __LINE__);
         $options = array();
         for ($int = 5; $int <= 75; $int+=5)
-            $options[$int] = $int . "% battery remaining";
+            $options[$int] = $int . " % " . lang('apcups_battery_remaining');
         return $options;
     }
 

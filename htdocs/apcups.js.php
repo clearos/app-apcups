@@ -36,30 +36,50 @@
 $bootstrap = getenv('CLEAROS_BOOTSTRAP') ? getenv('CLEAROS_BOOTSTRAP') : '/usr/clearos/framework/shared';
 require_once $bootstrap . '/bootstrap.php';
 
+///////////////////////////////////////////////////////////////////////////////
+// T R A N S L A T I O N S
+///////////////////////////////////////////////////////////////////////////////
+
+clearos_load_language('apcups');
+clearos_load_language('base');
+
 header('Content-Type: application/x-javascript');
 
-echo "
-  $(document).ready(function() {
-    get_state();
-  });
-  function get_state() {
+?>
+
+var lang_error = '<?php echo lang('base_error'); ?>';
+var lang_start = '<?php echo lang('base_start'); ?>';
+var lang_battery_remaining = '<?php echo lang('apcups_battery_remaining'); ?>';
+$(document).ready(function() {
+    if (!$('#submit_update').length)
+        get_status();
+    $('#clearos_daemon_action').on('click', function(e) {
+        if ($('#clearos_daemon_action').html() == lang_start)
+            window.setTimeout(get_status, 3000);
+    });
+});
+function get_status() {
     $.ajax({
         type: 'GET',
         dataType: 'json',
-        url: '/app/apcups/get_state',
+        url: '/app/apcups/status',
         data: '',
         success: function(data) {
-            if (data != undefined && data.code == undefined) {
-                $.each(data, function(id, info) { 
-                    $('#state-' + id).html(info.status);
-                    if (info.degraded)
-                        $('#state-' + id).addClass('theme-text-alert');
-                })
+            if (data != undefined && data.code == 0) {
+                $('#model_text').html(data.status.model);
+                $('#status_text').html(data.status.status);
+                $('#load_percent_text').html(data.status.loadpct);
+                $('#battery_charge_text').html(data.status.bcharge);
+                $('#battery_time_remaining_text').html(data.status.timeleft);
+                $('#battery_age_text').html(data.status.battage);
+                $('#powerdown_text').html(data.status.mbattchg + ' % ' + lang_battery_remaining);
+                $('#connection_error').hide();
+                window.setTimeout(get_status, 3000);
+            } else {
+                clearos_dialog_box('error', lang_error, data.errmsg);
             }
-            window.setTimeout(get_state, 1000);
         }
     });
-  }
-";
+}
 
 // vim: syntax=php ts=4

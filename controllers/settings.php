@@ -126,6 +126,8 @@ class Settings extends ClearOS_Controller
         } catch (Engine_Exception $e) {
             $data['error'] = clearos_exception_message($e);
             $data['is_found'] = FALSE;
+            if ($mode == 'edit')
+                redirect('/apcups');
         }
         $data['powerdown_options'] = $this->apc->get_powerdown_options();
         $data['control_email'] = $this->apc->get_email();
