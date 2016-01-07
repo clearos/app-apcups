@@ -1,8 +1,8 @@
 #!/bin/sh
 
 LINE=`grep "^export APCUPSD_MAIL=" /etc/apcupsd/apccontrol 2>/dev/null`
-CHECK=`echo $LINE | grep /usr/sbin/sendmail`
+CHECK=`echo $LINE | grep /usr/bin/mail`
 if [ -z "$CHECK" ]; then
-    sed -i -e "s/^export APCUPSD_MAIL=.*$/export APCUPSD_MAIL=\"\/usr\/sbin\/sendmail\"/i" /etc/apcupsd/apccontrol
+    sed -i -e "s/^export APCUPSD_MAIL=.*$/export APCUPSD_MAIL=\"\/usr\/bin\/mail\"/i" /etc/apcupsd/apccontrol
     /usr/sbin/service apcupsd restart
 fi
