@@ -80,7 +80,8 @@ function get_status() {
                 $('#connection_error').hide();
                 window.setTimeout(get_status, 3000);
             } else {
-                clearos_dialog_box('error', lang_error, data.errmsg);
+                /* Causes pop-up on dashboard */
+                /* clearos_dialog_box('error', lang_error, data.errmsg); */
             }
         }
     });

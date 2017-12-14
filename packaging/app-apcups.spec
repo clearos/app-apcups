@@ -1,7 +1,7 @@
 
 Name: app-apcups
 Epoch: 1
-Version: 2.0.1
+Version: 2.0.2
 Release: 1%{dist}
 Summary: APC Battery Backup Manager
 License: GPLv3
@@ -74,6 +74,7 @@ exit 0
 %files core
 %defattr(-,root,root)
 %exclude /usr/clearos/apps/apcups/packaging
+%exclude /usr/clearos/apps/apcups/unify.json
 %dir /usr/clearos/apps/apcups
 /usr/clearos/apps/apcups/deploy
 /usr/clearos/apps/apcups/language

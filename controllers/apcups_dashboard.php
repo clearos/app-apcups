@@ -67,7 +67,11 @@ class Apcups_Dashboard extends ClearOS_Controller
         $this->lang->load('apcups');
         $this->load->library('apcups/Apc');
 
-        $data = $this->apc->get_status();
+        try {
+            $data = $this->apc->get_status();
+        } catch (\Exception $e) {
+            $data['errmsg'] = clearos_exception_message($e);
+        }
 
         // Load views
         //-----------
